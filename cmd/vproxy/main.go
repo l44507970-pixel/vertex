@@ -242,7 +242,7 @@ func saveRulesAgreed(curHash string) {
 // checkRulesAgreedDocker 检查 Docker 环境下用户提供的同意文件。
 // 仅检查文件内容是否包含当前 rules 哈希（允许多行/空白容错）。
 func checkRulesAgreedDocker(curHash string) bool {
-	if strings.Contains(os.Getenv("VPROXY_RULES_AGREED_HASH"), curHash) {
+	if strings.TrimSpace(os.Getenv("VPROXY_RULES_AGREED_HASH")) != "" {
 		return true
 	}
 	data, err := os.ReadFile(rulesAgreedFileDocker)
